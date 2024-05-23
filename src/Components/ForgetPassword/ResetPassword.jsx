@@ -7,7 +7,7 @@ const ResetPassword = () => {
   console.log(newPassword)
   let resetPassword = async () => {
     try {
-      const { data } = await axios.post(`https://speech-sapm.onrender.com/users/resetPassword`, newPassword)
+      const { data } = await axios.post(`https://speech-emotions-874.onrender.com/users/resetPassword`, newPassword)
       // if (data.message == "success") {
       //   setPhoto(data.photo.path)
       //   console.log(photo)

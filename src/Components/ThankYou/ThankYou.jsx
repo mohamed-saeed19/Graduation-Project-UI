@@ -1,20 +1,22 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import img1 from "../../image/backPage.png"
-import img2 from "../../image/thankYou.gif"
+import img2 from "../../image/thanks.json"
 import "./ThankYou.css"
+import Lottie from 'lottie-react'
 const ThankYou = () => {
   return (
     <div>
-      <Link to="/homepage/suggestion"><img src={img1} className="img-1-forget mx-2" /></Link>
  <div className="container">
   <div className="row">
-    <div className="col-md-12 text-center">
-            <img src={img2} className="img-thank" />
+    <div className="col-md-12 d-flex align-items-center justify-content-center ">
+      <div >
+            <Lottie loop={false} animationData={img2} />
+      </div>
     </div>
-    <div className="col-md-12 text-center">
-            <h3 className='text-thank' >Thank you for supporting us</h3>
+    <div className='d-flex justify-content-center align-items-center'>
+    <Link to="/homepage/suggestion"><button className="btn-suggestion ">Done</button></Link>
     </div>
+
   </div>
  </div>
     </div>

@@ -1,289 +1,305 @@
-import React from 'react'
-import { ResponsiveBar } from '@nivo/bar'
-const Week = () => {
-  let data = [
-    {
-      "Week": "Sun",
-      "Angery": 10,
-      "Happy": 20,
-      "Sad": 15,
-      "Normal": 11,
-    },
-    {
-      "Week": "Mon",
-      "Angery": 20,
-      "Happy": 10,
-      "Sad": 20,
-      "Normal": 25
-    },
-    {
-      "Week": "Tue",
-      "Angery": 22,
-      "Happy": 33,
-      "Sad": 25,
-      "Normal": 10,
-    },
-    {
-      "Week": "Wed",
-      "Angery": 15,
-      "Happy": 30,
-      "Sad": 20,
-      "Normal": 10,
+// eslint-disable-next-line no-unused-vars
+import * as React from 'react';
+// import { useEffect } from 'react';
+import {
+  ChartComponent,
+  SeriesCollectionDirective,
+  SeriesDirective,
+  Inject,
+  Legend,
+  Category,
+  Tooltip,
+  ColumnSeries,
+  DataLabel,
+  Highlight,
+} from '@syncfusion/ej2-react-charts';
+import { Browser } from '@syncfusion/ej2-base';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useLayoutEffect } from 'react';
+export let Angry = [];
+export let Disgusted = [];
+export let Fear = [];
+export let Happy = [];
+export let Natural = [];
+export let Sad = [];
+export let Surprised = [];
+export let Calm = [];
 
-    },
-    {
-      "Week": "Thu",
-      "Angery": 12,
-      "Happy": 10,
-      "Sad": 15,
-      "Normal": 20,
-    },
-    {
-      "Week": "Fri",
-      "Angery": 21,
-      "Happy": 17,
-      "Sad": 20,
-      "Normal": 16,
 
-    },
+
+async function getHistoryFotWeek() {
+  let { data } = await axios.get(
+    `https://speech-emotions-874.onrender.com/emotions/history/week/${localStorage.getItem(
+      "UserId"
+    )}`,
     {
-      "Week": "Sat",
-      "Angery": 15,
-      "Happy": 21,
-      "Sad": 30,
-      "Normal": 34,
+      headers: {
+        token: `${localStorage.getItem("Token")}`,
+      },
     }
-  ]
-  return (
-    <div className='parent-charts'>
-      <ResponsiveBar
-        data={data}
-        keys={[
-          'Angery',
-          'Sad',
-          'Happy',
-          'Normal'
-        ]}
-        indexBy="Week"
-        theme={{
+  );  
+    // console.log(data.Week)
 
-          "text": {
-            "fontSize": 11,
-            "fill": "#333333",
-            "outlineWidth": 0,
-            "outlineColor": "transparent"
-          },
-          "axis": {
-            "domain": {
-              "line": {
-                "stroke": "#777777",
-                "strokeWidth": 1
-              }
-            },
-            "legend": {
-              "text": {
-                "fontSize": 12,
-                "fill": "var(--text)",
-                "outlineWidth": 0,
-                "outlineColor": "transparent"
-              }
-            },
-            "ticks": {
-              "line": {
-                "stroke": "#777777",
-                "strokeWidth": 1
-              },
-              "text": {
-                "fontSize": 10,
-                "fill": "var(--text)",
-                "outlineWidth": 0,
-                "outlineColor": "transparent"
-              }
-            }
-          },
-          "grid": {
-            "line": {
-              "stroke": "#dddddd",
-              "strokeWidth": 1
-            }
-          },
-          "legends": {
-            "title": {
-              "text": {
-                "fontSize": 11,
-                "fill": "#333333",
-                "outlineWidth": 0,
-                "outlineColor": "transparent"
-              }
-            },
-            "text": {
-              "fontSize": 11,
-              "fill": "var(--text)",
-              "outlineWidth": 0,
-              "outlineColor": "transparent"
-            },
-            "ticks": {
-              "line": {},
-              "text": {
-                "fontSize": 10,
-                "fill": "#333333",
-                "outlineWidth": 0,
-                "outlineColor": "transparent"
-              }
-            }
-          },
-          "annotations": {
-            "text": {
-              "fontSize": 13,
-              "fill": "#333333",
-              "outlineWidth": 2,
-              "outlineColor": "#ffffff",
-              "outlineOpacity": 1
-            },
-            "link": {
-              "stroke": "#000000",
-              "strokeWidth": 1,
-              "outlineWidth": 2,
-              "outlineColor": "#ffffff",
-              "outlineOpacity": 1
-            },
-            "outline": {
-              "stroke": "#000000",
-              "strokeWidth": 2,
-              "outlineWidth": 2,
-              "outlineColor": "#ffffff",
-              "outlineOpacity": 1
-            },
-            "symbol": {
-              "fill": "#000000",
-              "outlineWidth": 2,
-              "outlineColor": "#ffffff",
-              "outlineOpacity": 1
-            }
-          },
-          "tooltip": {
-            "container": {
-              "background": "#ffffff",
-              "fontSize": 12
-            },
-            "basic": {},
-            "chip": {},
-            "table": {},
-            "tableCell": {},
-            "tableCellValue": {}
-          }
-        }}
-        margin={{ top: 50, right: 130, bottom: 100, left: 60 }}
-        padding={0.3}
-        groupMode="grouped"
-        valueScale={{ type: 'linear' }}
-        indexScale={{ type: 'band', round: true }}
-        colors={{ scheme: 'set1' }}
-        defs={[
-          {
-            id: 'dots',
-            type: 'patternDots',
-            background: 'inherit',
-            color: '#38bcb2',
-            size: 4,
-            padding: 1,
-            stagger: true
-          },
-          {
-            id: 'lines',
-            type: 'patternLines',
-            background: 'inherit',
-            color: '#eed312',
-            rotation: -45,
-            lineWidth: 6,
-            spacing: 10
-          }
-        ]}
-        fill={[
-          {
-            match: {
-              id: 'fries'
-            },
-            id: 'dots'
-          },
-          {
-            match: {
-              id: 'sandwich'
-            },
-            id: 'lines'
-          }
-        ]}
-        borderColor={{
-          from: 'color',
-          modifiers: [
-            [
-              'darker',
-              1.6
-            ]
-          ]
-        }}
-        axisTop={null}
-        axisRight={null}
-        axisBottom={{
-          tickSize: 5,
-          tickPadding: 5,
-          tickRotation: 0,
-          legend: 'Week',
-          legendPosition: 'middle',
-          legendOffset: 32,
-          truncateTickAt: 0
-        }}
-        axisLeft={{
-          tickSize: 5,
-          tickPadding: 5,
-          tickRotation: 0,
-          legend: 'The number of repetitions of emotion',
-          legendPosition: 'middle',
-          legendOffset: -40,
-          truncateTickAt: 0
-        }}
-        labelSkipWidth={12}
-        labelSkipHeight={12}
-        labelTextColor={{
-          from: 'color',
-          modifiers: [
-            [
-              'darker',
-              1.6
-            ]
-          ]
-        }}
-        legends={[
-          {
-            dataFrom: 'keys',
-            anchor: 'bottom',
-            direction: 'row',
-            justify: false,
-            translateX: 0,
-            translateY: 100,
-            itemsSpacing: 2,
-            itemWidth: 65,
-            itemHeight: 20,
-            itemDirection: 'left-to-right',
-            itemOpacity: 0.85,
-            symbolSize: 20,
-            effects: [
-              {
-                on: 'hover',
-                style: {
-                  itemOpacity: 1
-                }
-              }
-            ]
-          }
-        ]}
-        role="application"
-        ariaLabel="Nivo bar chart demo"
-        barAriaLabel={e => e.id + ": " + e.formattedValue + " in Week: " + e.indexValue}
-        responsive={true}
-      />
-    </div>
-  )
+
+
+
+   Angry = [
+  { x: 'Sun', y: data.Week.Sunday.Angry  , fill: ' #FF2414', toolTipMappingName: 'Sun' },
+  { x: 'Mon', y: data.Week.Monday.Angry, fill: ' #FF2414', toolTipMappingName: 'Mon' },
+  { x: 'Tue', y: data.Week.Tuesday.Angry, fill: ' #FF2414', toolTipMappingName: 'Tue' },
+  { x: 'Wed', y: data.Week.Wednesday.Angry, fill: ' #FF2414', toolTipMappingName: 'Wed' },
+  { x: 'Thu', y: data.Week.Thursday.Angry, fill: ' #FF2414', toolTipMappingName: 'Thu' },
+  { x: 'Fri', y: data.Week.Friday.Angry, fill: ' #FF2414', toolTipMappingName: 'Fri' },
+  { x: 'Sat', y: data.Week.Saturday.Angry, fill: ' #FF2414', toolTipMappingName: 'Sat' },
+];
+  Sad = [
+  { x: 'Sun', y: data.Week.Sunday.Sad, fill:    '  #0057AE', toolTipMappingName: 'Sun' },
+  { x: 'Mon', y: data.Week.Monday.Sad, fill:    '  #0057AE', toolTipMappingName: 'Mon' },
+  { x: 'Tue', y: data.Week.Tuesday.Sad, fill:   ' #0057AE', toolTipMappingName: 'Tue' },
+  { x: 'Wed', y: data.Week.Wednesday.Sad, fill: '  #0057AE', toolTipMappingName: 'Wed' },
+  { x: 'Thu', y: data.Week.Thursday.Sad, fill:  '  #0057AE', toolTipMappingName: 'Thu' },
+  { x: 'Fri', y: data.Week.Friday.Sad, fill:    '  #0057AE', toolTipMappingName: 'Fri' },
+  { x: 'Sat', y: data.Week.Saturday.Sad, fill:  ' #0057AE', toolTipMappingName: 'Sat' },
+];
+  Happy = [
+  { x: 'Sun', y: data.Week.Sunday.Happy,fill:'  #FFEB00', toolTipMappingName: 'Sun' },
+  { x: 'Mon', y: data.Week.Monday.Happy,fill:'  #FFEB00', toolTipMappingName: 'Mon' },
+  { x: 'Tue', y: data.Week.Tuesday.Happy,fill:'  #FFEB00', toolTipMappingName: 'Tue' },
+  { x: 'Wed', y: data.Week.Wednesday.Happy,fill:'  #FFEB00', toolTipMappingName: 'Wed' },
+  { x: 'Thu', y: data.Week.Thursday.Happy,fill:'  #FFEB00', toolTipMappingName: 'Thu' },
+  { x: 'Fri', y: data.Week.Friday.Happy,fill:'  #FFEB00', toolTipMappingName: 'Fri' },
+  { x: 'Sat', y: data.Week.Saturday.Happy,fill:'  #FFEB00', toolTipMappingName: 'Sat' },
+];
+  Natural = [
+  { x: 'Sun', y: data.Week.Sunday.Neutral,fill: " #CFD8DC", toolTipMappingName: 'Sun' },
+  { x: 'Mon', y: data.Week.Monday.Neutral,fill: " #CFD8DC", toolTipMappingName: 'Mon' },
+  { x: 'Tue', y: data.Week.Tuesday.Neutral,fill: " #CFD8DC", toolTipMappingName: 'Tue' },
+  { x: 'Wed', y: data.Week.Wednesday.Neutral,fill: " #CFD8DC", toolTipMappingName: 'Wed' },
+  { x: 'Thu', y: data.Week.Thursday.Neutral,fill: " #CFD8DC", toolTipMappingName: 'Thu' },
+  { x: 'Fri', y: data.Week.Friday.Neutral,fill: " #CFD8DC", toolTipMappingName: 'Fri' },
+  { x: 'Sat', y: data.Week.Saturday.Neutral,fill: " #CFD8DC", toolTipMappingName: 'Sat' },
+];
+  Calm = [
+  { x: 'Sun', y: data.Week.Sunday.Calm,fill: " #00BEFF", toolTipMappingName: 'Sun' },
+  { x: 'Mon', y: data.Week.Monday.Calm,fill: " #00BEFF", toolTipMappingName: 'Mon' },
+  { x: 'Tue', y: data.Week.Tuesday.Calm,fill: " #00BEFF", toolTipMappingName: 'Tue' },
+  { x: 'Wed', y: data.Week.Wednesday.Calm,fill: " #00BEFF", toolTipMappingName: 'Wed' },
+  { x: 'Thu', y: data.Week.Thursday.Calm,fill: " #00BEFF", toolTipMappingName: 'Thu' },
+  { x: 'Fri', y: data.Week.Friday.Calm,fill: " #00BEFF", toolTipMappingName: 'Fri' },
+  { x: 'Sat', y: data.Week.Saturday.Calm,fill: " #00BEFF", toolTipMappingName: 'Sat' },
+];
+  Fear = [
+  { x: 'Sun', y: data.Week.Sunday.Fear,fill: "  #B7043C", toolTipMappingName: 'Sun' },
+  { x: 'Mon', y: data.Week.Monday.Fear,fill: "  #B7043C", toolTipMappingName: 'Mon' },
+  { x: 'Tue', y: data.Week.Tuesday.Fear,fill: "  #B7043C", toolTipMappingName: 'Tue' },
+  { x: 'Wed', y: data.Week.Wednesday.Fear,fill: "  #B7043C", toolTipMappingName: 'Wed' },
+  { x: 'Thu', y: data.Week.Thursday.Fear,fill: "  #B7043C", toolTipMappingName: 'Thu' },
+  { x: 'Fri', y: data.Week.Friday.Fear,fill: "  #B7043C", toolTipMappingName: 'Fri' },
+  { x: 'Sat', y: data.Week.Saturday.Fear,fill: "  #B7043C", toolTipMappingName: 'Sat' },
+];
+  Disgusted = [
+  { x: 'Sun', y: data.Week.Sunday.Disgust,fill: "  #A1E533", toolTipMappingName: 'Sun' },
+  { x: 'Mon', y: data.Week.Monday.Disgust,fill: "  #A1E533", toolTipMappingName: 'Mon' },
+  { x: 'Tue', y: data.Week.Tuesday.Disgust,fill: "  #A1E533", toolTipMappingName: 'Tue' },
+  { x: 'Wed', y: data.Week.Wednesday.Disgust,fill: "  #A1E533", toolTipMappingName: 'Wed' },
+  { x: 'Thu', y: data.Week.Thursday.Disgust,fill: "  #A1E533", toolTipMappingName: 'Thu' },
+  { x: 'Fri', y: data.Week.Friday.Disgust,fill: "  #A1E533", toolTipMappingName: 'Fri' },
+  { x: 'Sat', y: data.Week.Saturday.Disgust,fill: "  #A1E533", toolTipMappingName: 'Sat' },
+];
+  Surprised = [
+  { x: 'Sun', y:data.Week.Sunday.Surprise ,fill: "  #FF6900",  toolTipMappingName: 'Sun' },
+  { x: 'Mon', y:data.Week.Monday.Surprise , fill: "  #FF6900", toolTipMappingName: 'Mon' },
+  { x: 'Tue', y:data.Week.Tuesday.Surprise ,fill: "  #FF6900",  toolTipMappingName: 'Tue' },
+  { x: 'Wed', y:data.Week.Wednesday.Surprise ,fill: "  #FF6900",  toolTipMappingName: 'Wed' },
+  { x: 'Thu', y:data.Week.Thursday.Surprise , fill: "  #FF6900", toolTipMappingName: 'Thu' },
+  { x: 'Fri', y:data.Week.Friday.Surprise , fill: "  #FF6900", toolTipMappingName: 'Fri' },
+  { x: 'Sat', y:data.Week.Saturday.Surprise , fill: "  #FF6900", toolTipMappingName: 'Sat' },
+];
 }
 
-export default Week
+const SAMPLE_CSS = `
+    .control-fluid {
+        padding: 0px !important;
+    }`;
+const Week = () => {
+
+  useLayoutEffect(() => {
+    getHistoryFotWeek();
+  }, []);
+
+  const loaded = (args) => {
+    let chart = document.getElementById('charts');
+    chart.setAttribute('title', '');
+  };
+  const load = (args) => {
+    let selectedTheme = location.hash.split('/')[1];
+    selectedTheme = selectedTheme ? selectedTheme : 'Material';
+    args.chart.theme = (
+      selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)
+    )
+      .replace(/-dark/i, 'Dark')
+      .replace(/contrast/i, 'Contrast');
+    if (selectedTheme === 'highcontrast') {
+      args.chart.series[0].marker.dataLabel.font.color = '#000000';
+      args.chart.series[1].marker.dataLabel.font.color = '#000000';
+      args.chart.series[2].marker.dataLabel.font.color = '#000000';
+      args.chart.series[3].marker.dataLabel.font.color = '#000000';
+      args.chart.series[4].marker.dataLabel.font.color = '#000000';
+      args.chart.series[5].marker.dataLabel.font.color = '#000000';
+      args.chart.series[6].marker.dataLabel.font.color = '#000000';
+      args.chart.series[7].marker.dataLabel.font.color = '#000000';
+    }
+  };
+  return (
+    
+    <div className="control-pane pt-5">
+      <div className='w-100 '>
+      <div className='text-center'>
+        <Link to="/homepage/history"><button style={{background:" rgb(243, 223, 227)",color:"black"}} className='btn px-3 mx-2' >Day</button></Link>
+        <Link to=""><button style={{background:" #F85899",color:"white"}} className='btn px-3 mx-2'>Week</button></Link>
+        <Link to="/homepage/history/month"><button style={{background:" rgb(243, 223, 227)",color:"black"}} className='btn px-3 mx-2'>Month</button></Link>
+        <Link to="/homepage/history/year"><button style={{background:" rgb(243, 223, 227)",color:"black"}} className='btn px-3 mx-2'>Year</button></Link>
+      </div>
+    </div> 
+      <style>{SAMPLE_CSS}</style>
+      <div className="control-section">
+        <ChartComponent
+          id="charts"
+          style={{ textAlign: 'center' }}
+          legendSettings={{ enableHighlight: true }}
+          primaryXAxis={{
+            labelIntersectAction: Browser.isDevice ? 'None' : 'Trim',
+            labelRotation: Browser.isDevice ? -45 : 0,
+            valueType: 'Category',
+            title: 'week',
+            majorGridLines: { width: 2 },
+            majorTickLines: { width: 2 },
+          }}
+          primaryYAxis={{
+            title: 'The number of repetitions of emotion',
+            majorTickLines: { width: 2 },
+            lineStyle: { width: 2 },
+            maximum: 50,
+            interval: 10,
+          }}
+          chartArea={{ border: { width: 0 } }}
+          load={load.bind(this)}
+          tooltip={{
+            enable: true,
+            header: '<b>${point.tooltip}</b>',
+            shared: true,
+          }}
+          width={Browser.isDevice ? '100%' : '75%'}
+          title="Weekly Emotions Analysis"
+          loaded={loaded.bind(this)}
+        >
+          <Inject
+            services={[
+              ColumnSeries,
+              Legend,
+              Tooltip,
+              Category,
+              DataLabel,
+              Highlight,
+            ]}
+          />
+          
+          <SeriesCollectionDirective >
+            <SeriesDirective
+              dataSource={Angry}
+              tooltipMappingName="toolTipMappingName"
+              xName="x"
+              columnSpacing={0.1}
+              yName="y"
+              name="Angry"
+              type="Column"
+              pointColorMapping='fill'
+
+            />
+            <SeriesDirective
+              dataSource={ Sad}
+              tooltipMappingName="toolTipMappingName"
+              xName="x"
+              columnSpacing={0.1}
+              yName="y"
+              name="Sad"
+              type="Column"
+              pointColorMapping='fill'
+
+            />
+            <SeriesDirective
+              dataSource={Happy}
+              tooltipMappingName="toolTipMappingName"
+              xName="x"
+              columnSpacing={0.1}
+              yName="y"
+              name="Happy"
+              type="Column"
+              pointColorMapping='fill'
+
+            />
+            <SeriesDirective
+              dataSource={Natural}
+              tooltipMappingName="toolTipMappingName"
+              xName="x"
+              columnSpacing={0.1}
+              yName="y"
+              name="Natural"
+              type="Column"
+              pointColorMapping='fill'
+
+            />
+            <SeriesDirective
+              dataSource={Calm}
+              tooltipMappingName="toolTipMappingName"
+              xName="x"
+              columnSpacing={0.1}
+              yName="y"
+              name="Calm"
+              type="Column"
+              pointColorMapping='fill'
+
+            />
+            <SeriesDirective
+              dataSource={Fear}
+              tooltipMappingName="toolTipMappingName"
+              xName="x"
+              columnSpacing={0.1}
+              yName="y"
+              name="Fear"
+              type="Column"
+              pointColorMapping='fill'
+
+            />
+            <SeriesDirective
+              dataSource={Disgusted}
+              tooltipMappingName="toolTipMappingName"
+              xName="x"
+              columnSpacing={0.1}
+              yName="y"
+              name="Disgusted"
+              type="Column"
+              pointColorMapping='fill'
+
+            />
+            <SeriesDirective
+              dataSource={Surprised}
+              tooltipMappingName="toolTipMappingName"
+              xName="x"
+              columnSpacing={0.1}
+              yName="y"
+              name="Surprised"
+              type="Column"
+              pointColorMapping='fill'
+
+            />
+          </SeriesCollectionDirective>
+        </ChartComponent>
+      </div>
+    </div>
+  );
+};
+export default Week;
+
+

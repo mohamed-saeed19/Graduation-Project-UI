@@ -1,9 +1,8 @@
-import { createRoot } from 'react-dom/client';
 /**
  * Sample for Column series
  */
 import * as React from 'react';
-import { useEffect } from 'react';
+import loading from "../../../image/loading.json"
 import {
   ChartComponent,
   SeriesCollectionDirective,
@@ -18,69 +17,116 @@ import {
 } from '@syncfusion/ej2-react-charts';
 import { Browser } from '@syncfusion/ej2-base';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useLayoutEffect } from 'react';
+import { useState } from 'react';
+import Lottie from 'lottie-react';
 
-export let Angry = [
-  { x: 'Sep', y: 27, fill: '#FF2414', toolTipMappingName: 'Sep' },
-  { x: 'Oct', y: 27, fill: '#FF2414', toolTipMappingName: 'Oct' },
-  { x: 'Nov', y: 27, fill: '#FF2414', toolTipMappingName: 'Nov' },
-  { x: 'Dec', y: 27, fill: '#FF2414', toolTipMappingName: 'Dec' },
-  
-];
-export let Sad = [
-  { x: 'Sep', y: 18, fill: '#0057AE', toolTipMappingName: 'Sep' },
-  { x: 'Oct', y: 18, fill: '#0057AE', toolTipMappingName: 'Oct' },
-  { x: 'Nov', y: 18, fill: '#0057AE', toolTipMappingName: 'Nov' },
-  { x: 'Dec', y: 18, fill: '#0057AE', toolTipMappingName: 'Dec' },
-  
-];
-export let Happy = [
-  { x: 'Sep', y: 40,fill:'#FFEB00', toolTipMappingName: 'Sep' },
-  { x: 'Oct', y: 40,fill:'#FFEB00', toolTipMappingName: 'Oct' },
-  { x: 'Nov', y: 40,fill:'#FFEB00', toolTipMappingName: 'Nov' },
-  { x: 'Dec', y: 40,fill:'#FFEB00', toolTipMappingName: 'Dec' },
- 
-];
-export let Natural = [
-  { x: 'Sep', y: 10,fill: " #CFD8DC", toolTipMappingName: 'Sep' },
-  { x: 'Oct', y: 10,fill: " #CFD8DC", toolTipMappingName: 'Oct' },
-  { x: 'Nov', y: 10,fill: " #CFD8DC", toolTipMappingName: 'Nov' },
-  { x: 'Dec', y: 10,fill: " #CFD8DC", toolTipMappingName: 'Dec' },
-  
-];
-export let Calm = [
-  { x: 'Sep', y: 35,fill: " #00BEFF", toolTipMappingName: 'Sep' },
-  { x: 'Oct', y: 35,fill: " #00BEFF", toolTipMappingName: 'Oct' },
-  { x: 'Nov', y: 35,fill: " #00BEFF", toolTipMappingName: 'Nov' },
-  { x: 'Dec', y: 35,fill: " #00BEFF", toolTipMappingName: 'Dec' },
-  
-];
-export let Fear = [
-  { x: 'Sep', y: 20,fill: "  #B7043C", toolTipMappingName: 'Sep' },
-  { x: 'Oct', y: 20,fill: "  #B7043C", toolTipMappingName: 'Oct' },
-  { x: 'Nov', y: 20,fill: "  #B7043C", toolTipMappingName: 'Nov' },
-  { x: 'Dec', y: 20,fill: "  #B7043C", toolTipMappingName: 'Dec' },
-  
-];
-export let Disgusted = [
-  { x: 'Sep', y: 32,fill: "  #A1E533", toolTipMappingName: 'Sep' },
-  { x: 'Oct', y: 32,fill: "  #A1E533", toolTipMappingName: 'Oct' },
-  { x: 'Nov', y: 32,fill: "  #A1E533", toolTipMappingName: 'Nov' },
-  { x: 'Dec', y: 32,fill: "  #A1E533", toolTipMappingName: 'Dec' },
+export let Angry = [];
+export let Natural = [];
+export let Happy = [];
+export let Sad = [];
+export let Disgusted = [];
+export let Fear = [];
+export let Surprised = [];
+export let Calm = [];
 
-];
-export let Surprised = [
-  { x: 'Sep', y: 27,fill: "  #FF6900",  toolTipMappingName: 'Sep' },
-  { x: 'Oct', y: 8, fill: "  #FF6900", toolTipMappingName: 'Oct' },
-  { x: 'Nov', y: 19,fill: "  #FF6900",  toolTipMappingName: 'Nov' },
-  { x: 'Dec', y: 17,fill: "  #FF6900",  toolTipMappingName: 'Dec' },
-  
-];
 
-const SAMPLE_CSS = `
-    .control-fluid {
-        padding: 0px !important;
-    }`;
-const Month3 = () => {
+
+
+const Month1 = () => {
+  const [month, setMonth] = useState({ Month: {} });
+
+  useLayoutEffect(() => {
+    getHistoryFotMonth();
+    // console.log("first");
+  }, []); 
+
+  async function getHistoryFotMonth() {
+    let { data } = await axios.get(
+      `https://speech-emotions-874.onrender.com/emotions/history/month/${localStorage.getItem("UserId")}`,
+      {
+        headers: {
+          token: `${localStorage.getItem("Token")}`,
+        },
+      }
+    );  
+    setMonth(data);
+    // console.log(data);
+  }
+
+  if (!month.Month["Week 1"]) {
+    return <><div className=' col-md-12 d-flex align-items-center justify-content-center'>
+    <div >
+              <Lottie animationData={loading} />
+    </div>
+</div> </>
+      
+  }
+  Angry = [
+    { x: 'Week1', y:  month.Month["Week 1"].Angry, fill: '#FF2414', toolTipMappingName: 'Week1' },
+    { x: 'Week2', y:  month.Month["Week 2"].Angry, fill: '#FF2414', toolTipMappingName: 'Week2' },
+    { x: 'Week3', y:  month.Month["Week 3"].Angry, fill: '#FF2414', toolTipMappingName: 'Week3' },
+    { x: 'Week4', y:  month.Month["Week 4"].Angry, fill: '#FF2414', toolTipMappingName: 'Week4' },
+    
+  ];
+    Sad = [
+    { x: 'Week1', y: month.Month["Week 1"].Sad, fill: '#0057AE', toolTipMappingName: 'Week1' },
+    { x: 'Week2', y: month.Month["Week 2"].Sad, fill: '#0057AE', toolTipMappingName: 'Week2' },
+    { x: 'Week3', y: month.Month["Week 3"].Sad, fill: '#0057AE', toolTipMappingName: 'Week3' },
+    { x: 'Week4', y: month.Month["Week 4"].Sad, fill: '#0057AE', toolTipMappingName: 'Week4' },
+    
+  ];
+    Happy = [
+    { x: 'Week1', y: month.Month["Week 1"].Happy,fill:'#FFEB00', toolTipMappingName: 'Week1' },
+    { x: 'Week2', y: month.Month["Week 2"].Happy,fill:'#FFEB00', toolTipMappingName: 'Week2' },
+    { x: 'Week3', y: month.Month["Week 3"].Happy,fill:'#FFEB00', toolTipMappingName: 'Week3' },
+    { x: 'Week4', y: month.Month["Week 4"].Happy,fill:'#FFEB00', toolTipMappingName: 'Week4' },
+   
+  ];
+    Natural = [
+    { x: 'Week1', y: month.Month["Week 1"].Neutral,fill: " #CFD8DC", toolTipMappingName: 'Week1' },
+    { x: 'Week2', y: month.Month["Week 2"].Neutral,fill: " #CFD8DC", toolTipMappingName: 'Week2' },
+    { x: 'Week3', y: month.Month["Week 3"].Neutral,fill: " #CFD8DC", toolTipMappingName: 'Week3' },
+    { x: 'Week4', y: month.Month["Week 4"].Neutral,fill: " #CFD8DC", toolTipMappingName: 'Week4' },
+    
+  ];
+    Calm = [
+    { x: 'Week1', y: month.Month["Week 1"].Calm,fill: " #00BEFF", toolTipMappingName: 'Week1' },
+    { x: 'Week2', y: month.Month["Week 2"].Calm,fill: " #00BEFF", toolTipMappingName: 'Week2' },
+    { x: 'Week3', y: month.Month["Week 3"].Calm,fill: " #00BEFF", toolTipMappingName: 'Week3' },
+    { x: 'Week4', y: month.Month["Week 4"].Calm,fill: " #00BEFF", toolTipMappingName: 'Week4' },
+    
+  ];
+    Fear = [
+    { x: 'Week1', y: month.Month["Week 1"].Fear,fill: "  #B7043C", toolTipMappingName: 'Week1' },
+    { x: 'Week2', y: month.Month["Week 2"].Fear,fill: "  #B7043C", toolTipMappingName: 'Week2' },
+    { x: 'Week3', y: month.Month["Week 3"].Fear,fill: "  #B7043C", toolTipMappingName: 'Week3' },
+    { x: 'Week4', y: month.Month["Week 4"].Fear,fill: "  #B7043C", toolTipMappingName: 'Week4' },
+    
+  ];
+    Disgusted = [
+    { x: 'Week1', y: month.Month["Week 1"].Disgust,fill: "  #A1E533", toolTipMappingName: 'Week1' },
+    { x: 'Week2', y: month.Month["Week 2"].Disgust,fill: "  #A1E533", toolTipMappingName: 'Week2' },
+    { x: 'Week3', y: month.Month["Week 3"].Disgust,fill: "  #A1E533", toolTipMappingName: 'Week3' },
+    { x: 'Week4', y: month.Month["Week 4"].Disgust,fill: "  #A1E533", toolTipMappingName: 'Week4' },
+  
+  ];
+    Surprised = [
+    { x: 'Week1', y: month.Month["Week 1"].Surprise ,fill: "  #FF6900",  toolTipMappingName: 'Week1' },
+    { x: 'Week2', y:  month.Month["Week 2"].Surprise, fill: "  #FF6900", toolTipMappingName: 'Week2' },
+    { x: 'Week3', y:  month.Month["Week 3"].Surprise,fill: "  #FF6900",  toolTipMappingName: 'Week3' },
+    { x: 'Week4', y:  month.Month["Week 4"].Surprise,fill: "  #FF6900",  toolTipMappingName: 'Week4' },
+    
+  ];
+  
+  
+  const SAMPLE_CSS = `
+      .control-fluid {
+          padding: 0px !important;
+      }`;
+
+
   const loaded = (args) => {
     let chart = document.getElementById('charts');
     chart.setAttribute('title', '');
@@ -106,6 +152,14 @@ const Month3 = () => {
   };
   return (
     <div className="control-pane">
+      <div className='w-100 mt-5'>
+      <div className='text-center'>
+        <Link to="/homepage/history"><button style={{background:" rgb(243, 223, 227)",color:"black"}} className='btn px-3 mx-2' >Day</button></Link>
+        <Link to="/homepage/history/week"><button style={{background:" rgb(243, 223, 227)",color:"black"}} className='btn px-3 mx-2'>Week</button></Link>
+        <Link to=""><button style={{background:" #F85899",color:"white"}}  className='btn px-3 mx-2'>Month</button></Link>
+        <Link to="/homepage/history/year"><button style={{background:" rgb(243, 223, 227)",color:"black"}} className='btn px-3 mx-2'>Year</button></Link>
+      </div>
+    </div> 
       <style>{SAMPLE_CSS}</style>
       <div className="control-section">
         <ChartComponent
@@ -116,7 +170,7 @@ const Month3 = () => {
             labelIntersectAction: Browser.isDevice ? 'None' : 'Trim',
             labelRotation: Browser.isDevice ? -45 : 0,
             valueType: 'Category',
-            title: 'Year',
+            title: 'Month',
             interval: 1,
             majorGridLines: { width: 0 },
             majorTickLines: { width: 0 },
@@ -136,7 +190,7 @@ const Month3 = () => {
             shared: true,
           }}
           width={Browser.isDevice ? '100%' : '75%'}
-          title="Yearly Emotions Analysis"
+          title="Monthly Emotions Analysis"
           loaded={loaded.bind(this)}
         >
           <Inject
@@ -242,14 +296,9 @@ const Month3 = () => {
           </SeriesCollectionDirective>
         </ChartComponent>
       </div>
-      <div className='text-center mt-5'>
-    <Link to="/homepage/history/year"><button style={{background:" rgb(243, 223, 227)",color:"black"}} className='btn  px-3 mx-2' > 1</button></Link>
-    <Link to="/homepage/history/year/month2"><button style={{background:" rgb(243, 223, 227)",color:"black"}} className='btn px-3 mx-2'> 2</button></Link>
-    <Link to=""><button style={{background:" #F85899",color:"white"}} className='btn px-3 mx-2'> 3</button></Link>
-  </div> 
     </div>
   );
 };
-export default Month3;
+export default Month1;
 
 

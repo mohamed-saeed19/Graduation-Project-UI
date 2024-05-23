@@ -14,7 +14,7 @@
 
 .btn-record {
 
-    color: var(--text);
+    color: var(--text-customized);
     background: #CA4B7F;
 }
 
@@ -27,7 +27,7 @@
         width: 100%;
         font-size: 1.3em !important;
         background: #CA4B7F;
-        color: var(--text);
+        color: var(--text-customized);
         padding: 10px 20px;
     }
 
@@ -36,10 +36,11 @@
 input[type="file"] {
     position: relative;
     overflow: hidden;
-    width: 90px;
-    height: 90px;
+    width: 100px;
+    height: 100px;
     cursor: pointer;
-
+    border-radius: 100%;
+margin-left: 3rem;
 }
 
 input[type="file"]::before {
@@ -49,15 +50,11 @@ input[type="file"]::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url("../../../image/setRecord.png");
+    background-image: url("../../../image/import-removebg-preview.png");
     background-position: center;
     background-repeat: no-repeat;
     z-index: 1;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
+
 }
 
 input[type="file"]:focus::before {
@@ -76,7 +73,7 @@ input[type="file"]:focus::before {
     /* تغيير المؤشر عند تحريك الماوس فوق الصورة */
 }
 
-.record::before {
+/* .record::before {
     content: "";
     position: absolute;
     top: 0;
@@ -87,12 +84,12 @@ input[type="file"]:focus::before {
     background-position: center;
     background-repeat: no-repeat;
     z-index: 1;
-    border-radius: 5px;
+    border-radius: 5px; 
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
-}
+} */
 
 /* يمكنك أيضاً تخصيص مظهر التحديد أو التأكيد هنا */
 .record:focus::before {

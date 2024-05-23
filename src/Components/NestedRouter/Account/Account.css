@@ -45,20 +45,31 @@
 
 .btn-account {
     font-size: 1.3em;
-    /* background: #8A33B2; */
+    background: #FF78AF;
     border: none;
-    /* padding: 10px 20px; */
+    padding: 10px 20px;
     cursor: pointer;
-    color: var(--text);
+    border-radius: 40px;
+    color: var(--text-customized);
     font-weight: 800;
     text-align: center;
-    font-family: "Protest Riot", sans-serif !important;
+    letter-spacing: 1px;
+
+}
+.btn-delete {
+    font-size: 1.3em;
+    border: none;
+    background: var(--header);
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 40px;
+    font-weight: 800;
+    text-align: center;
     letter-spacing: 1px;
 
 }
 .fa-pen-to-square:hover,.btn-account:hover{
     cursor: pointer;
-    color: rgb(64, 64, 223);
 }
 .fa-trash-can {
     color: var(--text);

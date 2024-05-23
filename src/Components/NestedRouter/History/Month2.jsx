@@ -1,267 +1,252 @@
-import React from 'react'
-import { ResponsiveBar } from '@nivo/bar'
+
+import * as React from 'react';
+import { useEffect } from 'react';
+import {
+  ChartComponent,
+  SeriesCollectionDirective,
+  SeriesDirective,
+  Inject,
+  Legend,
+  Category,
+  Tooltip,
+  ColumnSeries,
+  DataLabel,
+  Highlight,
+} from '@syncfusion/ej2-react-charts';
+import { Browser } from '@syncfusion/ej2-base';
+import { Link } from 'react-router-dom';
+
+export let Angry = [
+  { x: 'May', y: 27, fill: '#FF2414', toolTipMappingName: 'May' },
+  { x: 'Jun', y: 27, fill: '#FF2414', toolTipMappingName: 'Jun' },
+  { x: 'Jul', y: 27, fill: '#FF2414', toolTipMappingName: 'Jul' },
+  { x: 'Aug', y: 27, fill: '#FF2414', toolTipMappingName: 'Aug' },
+  
+];
+export let Sad = [
+  { x: 'May', y: 18, fill: '#0057AE', toolTipMappingName: 'May' },
+  { x: 'Jun', y: 18, fill: '#0057AE', toolTipMappingName: 'Jun' },
+  { x: 'Jul', y: 18, fill: '#0057AE', toolTipMappingName: 'Jul' },
+  { x: 'Aug', y: 18, fill: '#0057AE', toolTipMappingName: 'Aug' },
+  
+];
+export let Happy = [
+  { x: 'May', y: 40,fill:'#FFEB00', toolTipMappingName: 'May' },
+  { x: 'Jun', y: 40,fill:'#FFEB00', toolTipMappingName: 'Jun' },
+  { x: 'Jul', y: 40,fill:'#FFEB00', toolTipMappingName: 'Jul' },
+  { x: 'Aug', y: 40,fill:'#FFEB00', toolTipMappingName: 'Aug' },
+ 
+];
+export let Natural = [
+  { x: 'May', y: 10,fill: " #CFD8DC", toolTipMappingName: 'May' },
+  { x: 'Jun', y: 10,fill: " #CFD8DC", toolTipMappingName: 'Jun' },
+  { x: 'Jul', y: 10,fill: " #CFD8DC", toolTipMappingName: 'Jul' },
+  { x: 'Aug', y: 10,fill: " #CFD8DC", toolTipMappingName: 'Aug' },
+  
+];
+export let Calm = [
+  { x: 'May', y: 35,fill: " #00BEFF", toolTipMappingName: 'May' },
+  { x: 'Jun', y: 35,fill: " #00BEFF", toolTipMappingName: 'Jun' },
+  { x: 'Jul', y: 35,fill: " #00BEFF", toolTipMappingName: 'Jul' },
+  { x: 'Aug', y: 35,fill: " #00BEFF", toolTipMappingName: 'Aug' },
+  
+];
+export let Fear = [
+  { x: 'May', y: 20,fill: "  #B7043C", toolTipMappingName: 'May' },
+  { x: 'Jun', y: 20,fill: "  #B7043C", toolTipMappingName: 'Jun' },
+  { x: 'Jul', y: 20,fill: "  #B7043C", toolTipMappingName: 'Jul' },
+  { x: 'Aug', y: 20,fill: "  #B7043C", toolTipMappingName: 'Aug' },
+  
+];
+export let Disgusted = [
+  { x: 'May', y: 32,fill: "  #A1E533", toolTipMappingName: 'May' },
+  { x: 'Jun', y: 32,fill: "  #A1E533", toolTipMappingName: 'Jun' },
+  { x: 'Jul', y: 32,fill: "  #A1E533", toolTipMappingName: 'Jul' },
+  { x: 'Aug', y: 32,fill: "  #A1E533", toolTipMappingName: 'Aug' },
+
+];
+export let Surprised = [
+  { x: 'May', y: 27,fill: "  #FF6900",  toolTipMappingName: 'May' },
+  { x: 'Jun', y: 8, fill: "  #FF6900", toolTipMappingName: 'Jun' },
+  { x: 'Jul', y: 19,fill: "  #FF6900",  toolTipMappingName: 'Jul' },
+  { x: 'Aug', y: 17,fill: "  #FF6900",  toolTipMappingName: 'Aug' },
+  
+];
+
+const SAMPLE_CSS = `
+    .control-fluid {
+        padding: 0px !important;
+    }`;
 const Month2 = () => {
-  let data = [
-    {
-      "Month": "May",
-      "Angery": 12,
-      "Happy": 10,
-      "Sad": 15,
-      "Normal": 20,
-    },
-    {
-      "Month": "June",
-      "Angery": 21,
-      "Happy": 17,
-      "Sad": 20,
-      "Normal": 16,
-
-    },
-    {
-      "Month": "July",
-      "Angery": 15,
-      "Happy": 21,
-      "Sad": 30,
-      "Normal": 34,
-    },
-    {
-      "Month": "August",
-      "Angery": 15,
-      "Happy": 21,
-      "Sad": 30,
-      "Normal": 34,
+  const loaded = (args) => {
+    let chart = document.getElementById('charts');
+    chart.setAttribute('title', '');
+  };
+  const load = (args) => {
+    let selectedTheme = location.hash.split('/')[1];
+    selectedTheme = selectedTheme ? selectedTheme : 'Material';
+    args.chart.theme = (
+      selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)
+    )
+      .replace(/-dark/i, 'Dark')
+      .replace(/contrast/i, 'Contrast');
+    if (selectedTheme === 'highcontrast') {
+      args.chart.series[0].marker.dataLabel.font.color = '#000000';
+      args.chart.series[1].marker.dataLabel.font.color = '#000000';
+      args.chart.series[2].marker.dataLabel.font.color = '#000000';
+      args.chart.series[3].marker.dataLabel.font.color = '#000000';
+      args.chart.series[4].marker.dataLabel.font.color = '#000000';
+      args.chart.series[5].marker.dataLabel.font.color = '#000000';
+      args.chart.series[6].marker.dataLabel.font.color = '#000000';
+      args.chart.series[7].marker.dataLabel.font.color = '#000000';
     }
-    
-  ]
+  };
   return (
-    <div className='parent-charts'>
-      <ResponsiveBar
-        data={data}
-        keys={[
-          'Angery',
-          'Sad',
-          'Happy',
-          'Normal'
-        ]}
-        indexBy="Month"
-        theme={{
+    <div className="control-pane  ">
+      <style>{SAMPLE_CSS}</style>
+      <div className="control-section">
+        <ChartComponent
+          id="charts"
+          style={{ textAlign: 'center' }}
+          legendSettings={{ enableHighlight: true }}
+          primaryXAxis={{
+            labelIntersectAction: Browser.isDevice ? 'None' : 'Trim',
+            labelRotation: Browser.isDevice ? -45 : 0,
+            valueType: 'Category',
+            title: 'Year',
+            interval: 1,
+            majorGridLines: { width: 0 },
+            majorTickLines: { width: 0 },
+          }}
+          primaryYAxis={{
+            title: 'The number of repetitions of emotion',
+            majorTickLines: { width: 0 },
+            lineStyle: { width: 0 },
+            maximum: 50,
+            interval: 10,
+          }}
+          chartArea={{ border: { width: 0 } }}
+          load={load.bind(this)}
+          tooltip={{
+            enable: true,
+            header: '<b>${point.tooltip}</b>',
+            shared: true,
+          }}
+          width={Browser.isDevice ? '100%' : '75%'}
+          title="Yearly Emotions Analysis"
+          loaded={loaded.bind(this)}
+        >
+          <Inject
+            services={[
+              ColumnSeries,
+              Legend,
+              Tooltip,
+              Category,
+              DataLabel,
+              Highlight,
+            ]}
+          />
+          <SeriesCollectionDirective>
+            {/* hover values */}
+            <SeriesDirective
+              dataSource={Angry}
+              tooltipMappingName="toolTipMappingName"
+              xName="x"
+              columnSpacing={0.1}
+              yName="y"
+              name="Angry"
+              type="Column"
+              pointColorMapping='fill'
 
-          "text": {
-            "fontSize": 11,
-            "fill": "#333333",
-            "outlineWidth": 0,
-            "outlineColor": "transparent"
-          },
-          "axis": {
-            "domain": {
-              "line": {
-                "stroke": "#777777",
-                "strokeWidth": 1
-              }
-            },
-            "legend": {
-              "text": {
-                "fontSize": 12,
-                "fill": "var(--text)",
-                "outlineWidth": 0,
-                "outlineColor": "transparent"
-              }
-            },
-            "ticks": {
-              "line": {
-                "stroke": "#777777",
-                "strokeWidth": 1
-              },
-              "text": {
-                "fontSize": 11,
-                "fill": "var(--text)",
-                "outlineWidth": 0,
-                "outlineColor": "transparent"
-              }
-            }
-          },
-          "grid": {
-            "line": {
-              "stroke": "#dddddd",
-              "strokeWidth": 1
-            }
-          },
-          "legends": {
-            "title": {
-              "text": {
-                "fontSize": 11,
-                "fill": "#333333",
-                "outlineWidth": 0,
-                "outlineColor": "transparent"
-              }
-            },
-            "text": {
-              "fontSize": 11,
-              "fill": "var(--text)",
-              "outlineWidth": 0,
-              "outlineColor": "transparent"
-            },
-            "ticks": {
-              "line": {},
-              "text": {
-                "fontSize": 10,
-                "fill": "#333333",
-                "outlineWidth": 0,
-                "outlineColor": "transparent"
-              }
-            }
-          },
-          "annotations": {
-            "text": {
-              "fontSize": 13,
-              "fill": "#333333",
-              "outlineWidth": 2,
-              "outlineColor": "#ffffff",
-              "outlineOpacity": 1
-            },
-            "link": {
-              "stroke": "#000000",
-              "strokeWidth": 1,
-              "outlineWidth": 2,
-              "outlineColor": "#ffffff",
-              "outlineOpacity": 1
-            },
-            "outline": {
-              "stroke": "#000000",
-              "strokeWidth": 2,
-              "outlineWidth": 2,
-              "outlineColor": "#ffffff",
-              "outlineOpacity": 1
-            },
-            "symbol": {
-              "fill": "#000000",
-              "outlineWidth": 2,
-              "outlineColor": "#ffffff",
-              "outlineOpacity": 1
-            }
-          },
-          "tooltip": {
-            "container": {
-              "background": "#ffffff",
-              "fontSize": 12
-            },
-            "basic": {},
-            "chip": {},
-            "table": {},
-            "tableCell": {},
-            "tableCellValue": {}
-          }
-        }}
-        margin={{ top: 50, right: 130, bottom: 100, left: 60 }}
-        padding={0.3}
-        groupMode="grouped"
-        valueScale={{ type: 'linear' }}
-        indexScale={{ type: 'band', round: true }}
-        colors={{ scheme: 'set1' }}
-        defs={[
-          {
-            id: 'dots',
-            type: 'patternDots',
-            background: 'inherit',
-            color: '#38bcb2',
-            size: 4,
-            padding: 1,
-            stagger: true
-          },
-          {
-            id: 'lines',
-            type: 'patternLines',
-            background: 'inherit',
-            color: '#eed312',
-            rotation: -45,
-            lineWidth: 6,
-            spacing: 10
-          }
-        ]}
-        fill={[
-          {
-            match: {
-              id: 'fries'
-            },
-            id: 'dots'
-          },
-          {
-            match: {
-              id: 'sandwich'
-            },
-            id: 'lines'
-          }
-        ]}
-        borderColor={{
-          from: 'color',
-          modifiers: [
-            [
-              'darker',
-              1.6
-            ]
-          ]
-        }}
-        axisTop={null}
-        axisRight={null}
-        axisBottom={{
-          tickSize: 5,
-          tickPadding: 5,
-          tickRotation: 0,
-          legend: 'Month',
-          legendPosition: 'middle',
-          legendOffset: 32,
-          truncateTickAt: 0
-        }}
-        axisLeft={{
-          tickSize: 5,
-          tickPadding: 5,
-          tickRotation: 0,
-          legend: 'The number of repetitions of emotion',
-          legendPosition: 'middle',
-          legendOffset: -40,
-          truncateTickAt: 0
-        }}
-        labelSkipWidth={12}
-        labelSkipHeight={12}
-        labelTextColor={{
-          from: 'color',
-          modifiers: [
-            [
-              'darker',
-              1.6
-            ]
-          ]
-        }}
-        legends={[
-          {
-            dataFrom: 'keys',
-            anchor: 'bottom',
-            direction: 'row',
-            justify: false,
-            translateX: 0,
-            translateY: 100,
-            itemsSpacing: 2,
-            itemWidth: 65,
-            itemHeight: 20,
-            itemDirection: 'left-to-right',
-            itemOpacity: 0.85,
-            symbolSize: 20,
-            effects: [
-              {
-                on: 'hover',
-                style: {
-                  itemOpacity: 1
-                }
-              }
-            ]
-          }
-        ]}
-        role="application"
-        ariaLabel="Nivo bar chart demo"
-        barAriaLabel={e => e.id + ": " + e.formattedValue + " in Month: " + e.indexValue}
-      />
+            />
+            <SeriesDirective
+              dataSource={ Sad}
+              tooltipMappingName="toolTipMappingName"
+              xName="x"
+              columnSpacing={0.1}
+              yName="y"
+              name="Sad"
+              type="Column"
+              pointColorMapping='fill'
+
+            />
+            <SeriesDirective
+              dataSource={Happy}
+              tooltipMappingName="toolTipMappingName"
+              xName="x"
+              columnSpacing={0.1}
+              yName="y"
+              name="Happy"
+              type="Column"
+              pointColorMapping='fill'
+
+            />
+            <SeriesDirective
+              dataSource={Natural}
+              tooltipMappingName="toolTipMappingName"
+              xName="x"
+              columnSpacing={0.1}
+              yName="y"
+              name="Natural"
+              type="Column"
+              pointColorMapping='fill'
+
+            />
+            <SeriesDirective
+              dataSource={Calm}
+              tooltipMappingName="toolTipMappingName"
+              xName="x"
+              columnSpacing={0.1}
+              yName="y"
+              name="Calm"
+              type="Column"
+              pointColorMapping='fill'
+
+            />
+            <SeriesDirective
+              dataSource={Fear}
+              tooltipMappingName="toolTipMappingName"
+              xName="x"
+              columnSpacing={0.1}
+              yName="y"
+              name="Fear"
+              type="Column"
+              pointColorMapping='fill'
+
+            />
+            <SeriesDirective
+              dataSource={Disgusted}
+              tooltipMappingName="toolTipMappingName"
+              xName="x"
+              columnSpacing={0.1}
+              yName="y"
+              name="Disgusted"
+              type="Column"
+              pointColorMapping='fill'
+
+            />
+            <SeriesDirective
+              dataSource={Surprised}
+              tooltipMappingName="toolTipMappingName"
+              xName="x"
+              columnSpacing={0.1}
+              yName="y"
+              name="Surprised"
+              type="Column"
+              pointColorMapping='fill'
+
+            />
+          </SeriesCollectionDirective>
+        </ChartComponent>
+      </div>
+      <div className='text-center mt-5'>
+    <Link to="/homepage/history/year"><button style={{background:" rgb(243, 223, 227)",color:"black"}} className='btn  px-3 mx-2' > 1</button></Link>
+    <Link to=""><button style={{background:" #F85899",color:"white"}} className='btn px-3 mx-2'> 2</button></Link>
+    <Link to="/homepage/history/year/month3"><button style={{background:" rgb(243, 223, 227)",color:"black"}} className='btn px-3 mx-2'> 3</button></Link>
+  </div>   
     </div>
-  )
-}
+  );
+};
+export default Month2;
 
-export default Month2
+

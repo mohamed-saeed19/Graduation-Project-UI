@@ -18,10 +18,11 @@
 }
 
 .btn-resend-email {
-  background: #F3A5D4;
+  background: #F85899;
   padding: 10px 20px;
   width: 30%;
   border: none;
+  color: white;
   border-radius: 25px;
   -webkit-border-radius: 25px;
   -moz-border-radius: 25px;

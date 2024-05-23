@@ -44,8 +44,8 @@ const ResetSendEmail = () => {
       </div>
       <div className='w-100 text-center '>
         <Link to="/login"><button className='btn-resend-email fontfamily'>Login</button></Link>
-        <h6 className='text-resend-email py-2 fontfamily'>We didn't get the link ?
-          <span style={{ color: "#F3A5D4", cursor: "pointer" }} onClick={Message}>
+        <h6 className='text-resend-email py-2 fontfamily'>You didn't get the link ?
+          <span style={{ color: "#F85899", cursor: "pointer" }} onClick={Message}>
             resend
             {/* <Snackbar
               anchorOrigin={{ vertical, horizontal }}

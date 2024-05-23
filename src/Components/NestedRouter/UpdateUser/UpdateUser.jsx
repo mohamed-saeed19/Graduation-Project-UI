@@ -1,6 +1,4 @@
 import { Link } from "react-router-dom"
-import img1 from "../../../image/backPage.png"
-import user from "../../../image/user.png"
 import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react"
 import axios from "axios"
@@ -59,7 +57,7 @@ const UpdateUser = () => {
   }
 
   async function sendUserData() {
-    let { data } = await axios.put(`https://speech-sapm.onrender.com/users`, formData, {
+    let { data } = await axios.put(`https://speech-emotions-874.onrender.com/users`, formData, {
       headers: {
         token: `${localStorage.getItem("Token")}`
       }
@@ -126,7 +124,7 @@ const UpdateUser = () => {
 
     <div className="container register ">
       <div className="pt-4">
-        <Link to="/homepage/account"><i className=" fa-solid fa-arrow-left" style={{ color: "var(--text)", fontSize: "1.5em" }}></i></Link>
+        {/* <Link to="/homepage/account"><i className=" fa-solid fa-arrow-left" style={{ color: "var(--text)", fontSize: "1.5em" }}></i></Link> */}
         {/* <h6 >Update Data</h6> */}
       </div>
       <div className="row text-center justify-content-center align-items-center">

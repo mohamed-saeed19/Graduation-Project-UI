@@ -19,6 +19,8 @@ export default function SpeechContextProvider(props) {
       icon: "question",
       iconHtml: "!",
       confirmButtonText: t("Yes"),
+      confirmButtonColor: " #FF78AF",
+      cancelButtonColor: " #FF78AF",
       cancelButtonText: t("No"),
       showCancelButton: true,
       showCloseButton: true

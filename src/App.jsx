@@ -23,6 +23,7 @@ import ThankYou from './Components/ThankYou/ThankYou'
 import AboutUs from './Components/NestedRouter/AboutUs/AboutUs.jsx'
 import Week from './Components/NestedRouter/History/Week.jsx'
 import Day from './Components/NestedRouter/History/Day.jsx'
+import RealMonth from './Components/NestedRouter/History/RealMonth.jsx'
 import Month from './Components/NestedRouter/History/Month.jsx'
 import Month2 from "./Components/NestedRouter/History/Month2.jsx"
 import Month3 from "./Components/NestedRouter/History/Month3.jsx"
@@ -83,6 +84,10 @@ function App() {
             },
             {
               path: "month",
+              element: <RealMonth />,
+            },
+            {
+              path: "year",
               element: <Month />,
               children: [
                 {

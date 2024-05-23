@@ -84,9 +84,9 @@ const Newrecord = () => {
   }
   return (
     <div className='parent-record d-flex flex-column align-items-center justify-content-around'>
-      <h4 className='sub-title'>{t("Click the button to start recording or import an audio")}</h4>
-      <div className='d-flex align-items-center justify-content-center'>
-        <div onClick={checkRecord} className='record' ></div>
+      <h4 className='sub-title' style={{color:"black"}}>{t("Click the button to start recording or import an audio")}</h4>
+      <div className='d-flex align-items-center justify-content-center between'>
+        <div onClick={checkRecord}  ><button className='btn border-0 ' style={{color:"white",background:"#CA4B7F",width:"100px",height:"100px" ,borderRadius:"100px"}} ><i className="fa-solid fa-microphone fa-4x"></i></button></div>
         <input type="file" accept="audio/*" onChange={handleFileChange} />
       </div>
 

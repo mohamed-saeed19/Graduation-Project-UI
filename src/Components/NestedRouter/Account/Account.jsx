@@ -12,8 +12,9 @@ const Account = () => {
   let Navigate = useNavigate();
   let { handleAlert } = useContext(speechContext);
   let deleteAccount = async () => {
+
     try {
-      const { data } = await axios.delete(`https://speech-sapm.onrender.com/users/delete`, {
+      const { data } = await axios.delete(`https://speech-emotions-874.onrender.com/users/delete`, {
         headers: {
           token: `${localStorage.getItem("Token")}`
         }
@@ -24,7 +25,7 @@ const Account = () => {
         localStorage.removeItem("phone");
         localStorage.removeItem("Gender");
         localStorage.removeItem("Email");
-        localStorage.removeItem("Date");
+        localStorage.removeItem("Date"); 
         localStorage.removeItem("FullName");
         localStorage.removeItem("FirstName");
         Navigate("/login");
@@ -44,16 +45,15 @@ const Account = () => {
       <div className='parent-account my-3 d-flex align-items-center justify-content-between p-2'>
 
         {
-          localStorage.getItem("imgCover") == "https://speech-sapm.onrender.com/null" ? < img src={img1} className='logo-account1 rounded-circle' /> : <img src={localStorage.getItem("imgCover")} className='logo-account1 rounded-circle' />
+          localStorage.getItem("imgCover") == "https://speech-emotions-874.onrender.com/null" ? < img src={img1} className='logo-account1 rounded-circle' /> : <img src={localStorage.getItem("imgCover")} className='logo-account1 rounded-circle' />
         }
 
 
 
 
         <div>
-          <h2 className='username fontfamily'>{t("UserName")} </h2>
-          <br />
-          <h6 className='username  sub-title name text-capitalize'>{localStorage.getItem("FullName")}</h6>
+        <h6 className='username sub-title text-capitalize'>{localStorage.getItem("FullName")}</h6>
+          <p className='text-center'>{localStorage.getItem("Email")}</p>
         </div>
       </div>
       <div className='details'>
@@ -63,7 +63,7 @@ const Account = () => {
             <i className="fa-solid fa-user logo-account"></i>
             <h3 className='p-3 username fontfamily'>{t("Name")}</h3>
           </div>
-          <h3 style={{ color: "var(--textHeader)" }} className='username fontfamily text-capitalize'>{localStorage.getItem("FirstName")}</h3>
+          <h3 style={{ color: "var(--textHeader)" }} className='username fontfamily text-capitalize'>{localStorage.getItem("FullName")}</h3>
 
         </div>
         <div className='d-flex align-items-center justify-content-between'>
@@ -87,11 +87,11 @@ const Account = () => {
           <div className='between d-flex align-items-center justify-content-center'>
 
             <Link to="/update">  <i className="fa-solid fa-pen-to-square img-account"></i></Link>
-            <Link to="/update"><span className='btn-account'> {t("Change Account Info")}</span></Link>
+            <Link to="/update"><button className='btn-account'> {t("Change Account Info")}</button></Link>
           </div>
-          <div className='between d-flex  justify-content-center gap-4 my-4'>
-            <i className="img-account fa-solid fa-trash-can " onClick={() => handleAlert(deleteAccount)}></i>
-            <p className='text-account username' onClick={() => handleAlert(deleteAccount)}>{t("Delete my Account")}</p>
+          <div className='  d-flex between justify-content-center align-items-center gap-4 my-4'>
+            <i className=" fa-solid fa-trash-can " onClick={() => handleAlert(deleteAccount)}></i>
+            <button className='text-account username btn-delete' onClick={() => handleAlert(deleteAccount)}>{t("Delete my Account")}</button>
           </div>
         </div>
 

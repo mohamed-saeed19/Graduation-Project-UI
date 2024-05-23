@@ -34,7 +34,7 @@
     background: #ca4b7f;
     border: none;
     padding: 10px;
-    color: var(--text);
+    color: var( --text-customized);
     width: 120px;
     border-radius: 5px;
     -webkit-border-radius: 5px;
