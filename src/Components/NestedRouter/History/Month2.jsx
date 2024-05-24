@@ -1,84 +1,113 @@
 
-import * as React from 'react';
-import { useEffect } from 'react';
-import {
-  ChartComponent,
-  SeriesCollectionDirective,
-  SeriesDirective,
-  Inject,
-  Legend,
-  Category,
-  Tooltip,
-  ColumnSeries,
-  DataLabel,
-  Highlight,
-} from '@syncfusion/ej2-react-charts';
+// eslint-disable-next-line no-unused-vars
+import React from 'react';
+import PropTypes from 'prop-types';
+import { ChartComponent, SeriesCollectionDirective, SeriesDirective, Inject, ColumnSeries, Legend, Tooltip, Category, DataLabel, Highlight } from '@syncfusion/ej2-react-charts';
 import { Browser } from '@syncfusion/ej2-base';
 import { Link } from 'react-router-dom';
+import Lottie from 'lottie-react';
+import loading from '../../../image/loading.json';
+import { useYear } from '../../Context/YearContext';
 
-export let Angry = [
-  { x: 'May', y: 27, fill: '#FF2414', toolTipMappingName: 'May' },
-  { x: 'Jun', y: 27, fill: '#FF2414', toolTipMappingName: 'Jun' },
-  { x: 'Jul', y: 27, fill: '#FF2414', toolTipMappingName: 'Jul' },
-  { x: 'Aug', y: 27, fill: '#FF2414', toolTipMappingName: 'Aug' },
-  
-];
-export let Sad = [
-  { x: 'May', y: 18, fill: '#0057AE', toolTipMappingName: 'May' },
-  { x: 'Jun', y: 18, fill: '#0057AE', toolTipMappingName: 'Jun' },
-  { x: 'Jul', y: 18, fill: '#0057AE', toolTipMappingName: 'Jul' },
-  { x: 'Aug', y: 18, fill: '#0057AE', toolTipMappingName: 'Aug' },
-  
-];
-export let Happy = [
-  { x: 'May', y: 40,fill:'#FFEB00', toolTipMappingName: 'May' },
-  { x: 'Jun', y: 40,fill:'#FFEB00', toolTipMappingName: 'Jun' },
-  { x: 'Jul', y: 40,fill:'#FFEB00', toolTipMappingName: 'Jul' },
-  { x: 'Aug', y: 40,fill:'#FFEB00', toolTipMappingName: 'Aug' },
- 
-];
-export let Natural = [
-  { x: 'May', y: 10,fill: " #CFD8DC", toolTipMappingName: 'May' },
-  { x: 'Jun', y: 10,fill: " #CFD8DC", toolTipMappingName: 'Jun' },
-  { x: 'Jul', y: 10,fill: " #CFD8DC", toolTipMappingName: 'Jul' },
-  { x: 'Aug', y: 10,fill: " #CFD8DC", toolTipMappingName: 'Aug' },
-  
-];
-export let Calm = [
-  { x: 'May', y: 35,fill: " #00BEFF", toolTipMappingName: 'May' },
-  { x: 'Jun', y: 35,fill: " #00BEFF", toolTipMappingName: 'Jun' },
-  { x: 'Jul', y: 35,fill: " #00BEFF", toolTipMappingName: 'Jul' },
-  { x: 'Aug', y: 35,fill: " #00BEFF", toolTipMappingName: 'Aug' },
-  
-];
-export let Fear = [
-  { x: 'May', y: 20,fill: "  #B7043C", toolTipMappingName: 'May' },
-  { x: 'Jun', y: 20,fill: "  #B7043C", toolTipMappingName: 'Jun' },
-  { x: 'Jul', y: 20,fill: "  #B7043C", toolTipMappingName: 'Jul' },
-  { x: 'Aug', y: 20,fill: "  #B7043C", toolTipMappingName: 'Aug' },
-  
-];
-export let Disgusted = [
-  { x: 'May', y: 32,fill: "  #A1E533", toolTipMappingName: 'May' },
-  { x: 'Jun', y: 32,fill: "  #A1E533", toolTipMappingName: 'Jun' },
-  { x: 'Jul', y: 32,fill: "  #A1E533", toolTipMappingName: 'Jul' },
-  { x: 'Aug', y: 32,fill: "  #A1E533", toolTipMappingName: 'Aug' },
 
-];
-export let Surprised = [
-  { x: 'May', y: 27,fill: "  #FF6900",  toolTipMappingName: 'May' },
-  { x: 'Jun', y: 8, fill: "  #FF6900", toolTipMappingName: 'Jun' },
-  { x: 'Jul', y: 19,fill: "  #FF6900",  toolTipMappingName: 'Jul' },
-  { x: 'Aug', y: 17,fill: "  #FF6900",  toolTipMappingName: 'Aug' },
-  
-];
 
-const SAMPLE_CSS = `
+
+export let Angry = [];
+export let Natural = [];
+export let Happy = [];
+export let Sad = [];
+export let Disgusted = [];
+export let Fear = [];
+export let Surprised = [];
+export let Calm = [];
+
+
+
+
+
+
+
+
+
+    export default function Month2() {
+      const { year } = useYear();
+
+  if (!year || !year.Year || !year.Year["January 2024"]) {
+    return (
+      <div className='col-md-12 d-flex align-items-center justify-content-center'>
+        <div>
+          <Lottie animationData={loading} />
+        </div>
+      </div>
+    );
+  }
+
+
+
+  Angry = [
+    { x: 'May', y:year.Year["May 2024"].Angry, fill: '#FF2414', toolTipMappingName: 'May' },
+    { x: 'Jun', y:year.Year["June 2024"].Angry, fill: '#FF2414', toolTipMappingName: 'Jun' },
+    { x: 'Jul', y:year.Year["July 2024"].Angry, fill: '#FF2414', toolTipMappingName: 'Jul' },
+    { x: 'Aug', y:year.Year["August 2024"].Angry, fill: '#FF2414', toolTipMappingName: 'Aug' },
+    
+  ];
+  Sad = [
+    { x: 'May', y:year.Year["May 2024"].Sad, fill: '#0057AE', toolTipMappingName: 'May' },
+    { x: 'Jun', y:year.Year["June 2024"].Sad, fill: '#0057AE', toolTipMappingName: 'Jun' },
+    { x: 'Jul', y:year.Year["July 2024"].Sad, fill: '#0057AE', toolTipMappingName: 'Jul' },
+    { x: 'Aug', y:year.Year["August 2024"].Sad, fill: '#0057AE', toolTipMappingName: 'Aug' },
+    
+  ];
+  Happy = [
+    { x: 'May', y:year.Year["May 2024"].Happy,fill:'#FFEB00', toolTipMappingName: 'May' },
+    { x: 'Jun', y:year.Year["June 2024"].Happy,fill:'#FFEB00', toolTipMappingName: 'Jun' },
+    { x: 'Jul', y:year.Year["July 2024"].Happy,fill:'#FFEB00', toolTipMappingName: 'Jul' },
+    { x: 'Aug', y:year.Year["August 2024"].Happy,fill:'#FFEB00', toolTipMappingName: 'Aug' },
+   
+  ];
+  Natural = [
+    { x: 'May', y:year.Year["May 2024"].Neutral,fill: " #CFD8DC", toolTipMappingName: 'May' },
+    { x: 'Jun', y:year.Year["June 2024"].Neutral,fill: " #CFD8DC", toolTipMappingName: 'Jun' },
+    { x: 'Jul', y:year.Year["July 2024"].Neutral,fill: " #CFD8DC", toolTipMappingName: 'Jul' },
+    { x: 'Aug', y:year.Year["August 2024"].Neutral,fill: " #CFD8DC", toolTipMappingName: 'Aug' },
+    
+  ];
+  Calm = [
+    { x: 'May', y:year.Year["May 2024"].Calm,fill: " #00BEFF", toolTipMappingName: 'May' },
+    { x: 'Jun', y:year.Year["June 2024"].Calm,fill: " #00BEFF", toolTipMappingName: 'Jun' },
+    { x: 'Jul', y:year.Year["July 2024"].Calm,fill: " #00BEFF", toolTipMappingName: 'Jul' },
+    { x: 'Aug', y:year.Year["August 2024"].Calm,fill: " #00BEFF", toolTipMappingName: 'Aug' },
+    
+  ];
+  Fear = [
+    { x: 'May', y:year.Year["May 2024"].Fear,fill: "  #B7043C", toolTipMappingName: 'May' },
+    { x: 'Jun', y:year.Year["June 2024"].Fear,fill: "  #B7043C", toolTipMappingName: 'Jun' },
+    { x: 'Jul', y:year.Year["July 2024"].Fear,fill: "  #B7043C", toolTipMappingName: 'Jul' },
+    { x: 'Aug', y:year.Year["August 2024"].Fear,fill: "  #B7043C", toolTipMappingName: 'Aug' },
+    
+  ];
+  Disgusted = [
+    { x: 'May', y:year.Year["May 2024"].Disguste,fill: "  #A1E533", toolTipMappingName: 'May' },
+    { x: 'Jun', y:year.Year["June 2024"].Disguste,fill: "  #A1E533", toolTipMappingName: 'Jun' },
+    { x: 'Jul', y:year.Year["July 2024"].Disguste,fill: "  #A1E533", toolTipMappingName: 'Jul' },
+    { x: 'Aug', y:year.Year["August 2024"].Disguste,fill: "  #A1E533", toolTipMappingName: 'Aug' },
+  
+  ];
+  Surprised = [
+    { x: 'May', y:year.Year["May 2024"].Surprise,fill: "  #FF6900",  toolTipMappingName: 'May' },
+    { x: 'Jun', y:year.Year["June 2024"].Surprise, fill: "  #FF6900", toolTipMappingName: 'Jun' },
+    { x: 'Jul', y:year.Year["July 2024"].Surprise,fill: "  #FF6900",  toolTipMappingName: 'Jul' },
+    { x: 'Aug', y:year.Year["August 2024"].Surprise,fill: "  #FF6900",  toolTipMappingName: 'Aug' },
+    
+  ];
+
+  const SAMPLE_CSS = `
     .control-fluid {
         padding: 0px !important;
     }`;
-const Month2 = () => {
-  const loaded = (args) => {
+
+
+  const loaded = () => {
     let chart = document.getElementById('charts');
     chart.setAttribute('title', '');
   };
@@ -91,14 +120,9 @@ const Month2 = () => {
       .replace(/-dark/i, 'Dark')
       .replace(/contrast/i, 'Contrast');
     if (selectedTheme === 'highcontrast') {
-      args.chart.series[0].marker.dataLabel.font.color = '#000000';
-      args.chart.series[1].marker.dataLabel.font.color = '#000000';
-      args.chart.series[2].marker.dataLabel.font.color = '#000000';
-      args.chart.series[3].marker.dataLabel.font.color = '#000000';
-      args.chart.series[4].marker.dataLabel.font.color = '#000000';
-      args.chart.series[5].marker.dataLabel.font.color = '#000000';
-      args.chart.series[6].marker.dataLabel.font.color = '#000000';
-      args.chart.series[7].marker.dataLabel.font.color = '#000000';
+      args.chart.series.forEach(series => {
+        series.marker.dataLabel.font.color = '#000000';
+      });
     }
   };
   return (
@@ -246,7 +270,9 @@ const Month2 = () => {
   </div>   
     </div>
   );
+}
+Month2.propTypes = {
+  year: PropTypes.object.isRequired,
 };
-export default Month2;
 
 

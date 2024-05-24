@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from 'react';
 import "./NewRecord.css"
 import { Link } from 'react-router-dom';
@@ -95,14 +96,14 @@ const Newrecord = () => {
           {error}
         </div>
         <div className='parentLottie d-flex align-items-center justify-content-center'>
-         <div onClick={checkRecord}>
+        <div onClick={checkRecord}>
             {stoprecording && !Boolean(error) ?<Lottie animationData={stop} className='lottieStop curser-pointer' /> : ""}
-         </div>
-         <div>
-           
+        </div>
+        <div>
+          
             {stoprecording && !Boolean(error) ? <Lottie animationData={sound} className='lottieSound' /> : ""}
-         </div>
-       </div>
+        </div>
+      </div>
 
         {audioUrl && (
           <div>

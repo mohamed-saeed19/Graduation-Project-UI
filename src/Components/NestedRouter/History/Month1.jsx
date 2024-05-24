@@ -1,24 +1,13 @@
 
 // eslint-disable-next-line no-unused-vars
-import * as React from 'react';
-import {
-  ChartComponent,
-  SeriesCollectionDirective,
-  SeriesDirective,
-  Inject,
-  Legend,
-  Category,
-  Tooltip,
-  ColumnSeries,
-  DataLabel,
-  Highlight,
-} from '@syncfusion/ej2-react-charts';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { ChartComponent, SeriesCollectionDirective, SeriesDirective, Inject, ColumnSeries, Legend, Tooltip, Category, DataLabel, Highlight } from '@syncfusion/ej2-react-charts';
 import { Browser } from '@syncfusion/ej2-base';
 import { Link } from 'react-router-dom';
-// import Lottie from 'lottie-react';
-// import loading from "../../../image/loading.json"
-import PropTypes from 'prop-types';
-
+import Lottie from 'lottie-react';
+import loading from '../../../image/loading.json';
+import { useYear } from '../../Context/YearContext';
 
 
 export let Angry = [];
@@ -37,71 +26,73 @@ export let Calm = [];
 
 
 
-export default function Month1({year}) {
-  // if (!year || !year.Year || !year.Year["January 2024"]) {
-  //   return (
-  //     <div className='col-md-12 d-flex align-items-center justify-content-center'>
-  //       <div>
-  //         <Lottie animationData={loading} />
-  //       </div>
-  //     </div>
-  //   );
-  // }
-  console.log(year)
+export default function Month1() {
+  const { year } = useYear();
+
+  if (!year || !year.Year || !year.Year["January 2024"]) {
+    return (
+      <div className='col-md-12 d-flex align-items-center justify-content-center'>
+        <div>
+          <Lottie animationData={loading} />
+        </div>
+      </div>
+    );
+  }
+  // console.log(year)
 
   Angry = [
-    { x: 'Jan', y: 27, fill: '#FF2414', toolTipMappingName: 'Jan' },
-    { x: 'Feb', y: 27, fill: '#FF2414', toolTipMappingName: 'Feb' },
-    { x: 'Mar', y: 27, fill: '#FF2414', toolTipMappingName: 'Mar' },
-    { x: 'Apr', y: 27, fill: '#FF2414', toolTipMappingName: 'Apr' },
+    { x: 'Jan', y:year.Year["January 2024"].Angry, fill: '#FF2414', toolTipMappingName: 'Jan' },
+    { x: 'Feb', y:year.Year["February 2024"].Angry, fill: '#FF2414', toolTipMappingName: 'Feb' },
+    { x: 'Mar', y:year.Year["March 2024"].Angry, fill: '#FF2414', toolTipMappingName: 'Mar' },
+    { x: 'Apr', y:year.Year["April 2024"].Angry, fill: '#FF2414', toolTipMappingName: 'Apr' },
   ];
   Sad = [
-    { x: 'Jan', y: 18, fill: '#0057AE', toolTipMappingName: 'Jan' },
-    { x: 'Feb', y: 18, fill: '#0057AE', toolTipMappingName: 'Feb' },
-    { x: 'Mar', y: 18, fill: '#0057AE', toolTipMappingName: 'Mar' },
-    { x: 'Apr', y: 18, fill: '#0057AE', toolTipMappingName: 'Apr' },
+    { x: 'Jan', y:year.Year["January 2024"].Sad, fill: '#0057AE', toolTipMappingName: 'Jan' },
+    { x: 'Feb', y:year.Year["February 2024"].Sad, fill: '#0057AE', toolTipMappingName: 'Feb' },
+    { x: 'Mar', y:year.Year["March 2024"].Sad, fill: '#0057AE', toolTipMappingName: 'Mar' },
+    { x: 'Apr', y:year.Year["April 2024"].Sad, fill: '#0057AE', toolTipMappingName: 'Apr' },
     
   ];
   Happy = [
-    { x: 'Jan', y: 40,fill:'#FFEB00', toolTipMappingName: 'Jan' },
-    { x: 'Feb', y: 40,fill:'#FFEB00', toolTipMappingName: 'Feb' },
-    { x: 'Mar', y: 40,fill:'#FFEB00', toolTipMappingName: 'Mar' },
-    { x: 'Apr', y: 40,fill:'#FFEB00', toolTipMappingName: 'Apr' },
+    { x: 'Jan', y:year.Year["January 2024"].Happy,fill:'#FFEB00', toolTipMappingName: 'Jan' },
+    { x: 'Feb', y:year.Year["February 2024"].Happy,fill:'#FFEB00', toolTipMappingName: 'Feb' },
+    { x: 'Mar', y:year.Year["March 2024"].Happy,fill:'#FFEB00', toolTipMappingName: 'Mar' },
+    { x: 'Apr', y:year.Year["April 2024"].Happy,fill:'#FFEB00', toolTipMappingName: 'Apr' },
    
   ];
   Natural = [
-    { x: 'Jan', y: 10,fill: " #CFD8DC", toolTipMappingName: 'Jan' },
-    { x: 'Feb', y: 10,fill: " #CFD8DC", toolTipMappingName: 'Feb' },
-    { x: 'Mar', y: 10,fill: " #CFD8DC", toolTipMappingName: 'Mar' },
-    { x: 'Apr', y: 10,fill: " #CFD8DC", toolTipMappingName: 'Apr' },
+    { x: 'Jan', y:year.Year["January 2024"].Neutral,fill: " #CFD8DC", toolTipMappingName: 'Jan' },
+    { x: 'Feb', y:year.Year["February 2024"].Neutral,fill: " #CFD8DC", toolTipMappingName: 'Feb' },
+    { x: 'Mar', y:year.Year["March 2024"].Neutral,fill: " #CFD8DC", toolTipMappingName: 'Mar' },
+    { x: 'Apr', y:year.Year["April 2024"].Neutral,fill: " #CFD8DC", toolTipMappingName: 'Apr' },
     
   ];
   Calm = [
-    { x: 'Jan', y: 35,fill: " #00BEFF", toolTipMappingName: 'Jan' },
-    { x: 'Feb', y: 35,fill: " #00BEFF", toolTipMappingName: 'Feb' },
-    { x: 'Mar', y: 35,fill: " #00BEFF", toolTipMappingName: 'Mar' },
-    { x: 'Apr', y: 35,fill: " #00BEFF", toolTipMappingName: 'Apr' },
+    { x: 'Jan', y:year.Year["January 2024"].Calm,fill: " #00BEFF", toolTipMappingName: 'Jan' },
+    { x: 'Feb', y:year.Year["February 2024"].Calm,fill: " #00BEFF", toolTipMappingName: 'Feb' },
+    { x: 'Mar', y:year.Year["March 2024"].Calm,fill: " #00BEFF", toolTipMappingName: 'Mar' },
+    { x: 'Apr', y:year.Year["April 2024"].Calm,fill: " #00BEFF", toolTipMappingName: 'Apr' },
     
   ];
   Fear = [
-    { x: 'Jan', y: 20,fill: "  #B7043C", toolTipMappingName: 'Jan' },
-    { x: 'Feb', y: 20,fill: "  #B7043C", toolTipMappingName: 'Feb' },
-    { x: 'Mar', y: 20,fill: "  #B7043C", toolTipMappingName: 'Mar' },
-    { x: 'Apr', y: 20,fill: "  #B7043C", toolTipMappingName: 'Apr' },
+    { x: 'Jan', y:year.Year["January 2024"].Fear,fill: "  #B7043C", toolTipMappingName: 'Jan' },
+    { x: 'Feb', y:year.Year["February 2024"].Fear,fill: "  #B7043C", toolTipMappingName: 'Feb' },
+    { x: 'Mar', y:year.Year["March 2024"].Fear,fill: "  #B7043C", toolTipMappingName: 'Mar' },
+    { x: 'Apr', y:year.Year["April 2024"].Fear,fill: "  #B7043C", toolTipMappingName: 'Apr' },
     
   ];
   Disgusted = [
-    { x: 'Jan', y: 32,fill: "  #A1E533", toolTipMappingName: 'Jan' },
-    { x: 'Feb', y: 32,fill: "  #A1E533", toolTipMappingName: 'Feb' },
-    { x: 'Mar', y: 32,fill: "  #A1E533", toolTipMappingName: 'Mar' },
-    { x: 'Apr', y: 32,fill: "  #A1E533", toolTipMappingName: 'Apr' },
+    { x: 'Jan', y:year.Year["January 2024"].Disguste,fill: "  #A1E533", toolTipMappingName: 'Jan' },
+    { x: 'Feb', y:year.Year["February 2024"].Disguste,fill: "  #A1E533", toolTipMappingName: 'Feb' },
+    { x: 'Mar', y:year.Year["March 2024"].Disguste,fill: "  #A1E533", toolTipMappingName: 'Mar' },
+    { x: 'Apr', y:year.Year["April 2024"].Disguste,fill: "  #A1E533", toolTipMappingName: 'Apr' },
   
   ];
   Surprised = [
-    { x: 'Jan', y: 27,fill: "  #FF6900",  toolTipMappingName: 'Jan' },
-    { x: 'Feb', y: 8, fill: "  #FF6900", toolTipMappingName: 'Feb' },
-    { x: 'Mar', y: 19,fill: "  #FF6900",  toolTipMappingName: 'Mar' },
-    { x: 'Apr', y: 17,fill: "  #FF6900",  toolTipMappingName: 'Apr' },
+    { x: 'Jan', y:year.Year["January 2024"].Surprise,fill: "  #FF6900",  toolTipMappingName: 'Jan' },
+    { x: 'Feb', y:year.Year["February 2024"].Surprise, fill: "  #FF6900", toolTipMappingName: 'Feb' },
+    { x: 'Mar', y:year.Year["March 2024"].Surprise,fill: "  #FF6900",  toolTipMappingName: 'Mar' },
+    { x: 'Apr', y:year.Year["April 2024"].Surprise,fill: "  #FF6900",  toolTipMappingName: 'Apr' },
     
   ];
 
@@ -111,7 +102,7 @@ export default function Month1({year}) {
         padding: 0px !important;
     }`;
 
-  const loaded = (args) => {
+  const loaded = () => {
     let chart = document.getElementById('charts');
     chart.setAttribute('title', '');
   };
@@ -281,3 +272,7 @@ export default function Month1({year}) {
 Month1.propTypes = {
   year: PropTypes.object.isRequired,
 };
+
+
+
+
