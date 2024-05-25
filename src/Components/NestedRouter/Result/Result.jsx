@@ -10,7 +10,7 @@ const Result = () => {
                         <Lottie animationData={img2} />
                     </div>
           </div>
-          <h3 className=' text-center' style={{ color: "#CA4B7F" }}>Happy</h3>
+          <h3 className=' text-center' style={{ color: "#CA4B7F" }}>{localStorage.getItem("emotion")}</h3>
     </div>
   )
 }
