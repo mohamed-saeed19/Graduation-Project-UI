@@ -1,6 +1,4 @@
-/**
- * Sample for Column series
- */
+// eslint-disable-next-line no-unused-vars
 import * as React from 'react';
 import loading from "../../../image/loading.json"
 import {
