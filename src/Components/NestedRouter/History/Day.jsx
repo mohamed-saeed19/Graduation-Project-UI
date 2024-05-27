@@ -11,58 +11,17 @@ import {
   AccumulationTooltip,
   AccumulationDataLabel,
 } from "@syncfusion/ej2-react-charts";
+import loading from "../../../image/loading.json"
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Lottie from "lottie-react";
 import img1 from "../../../image/empty.json"
 import { useLayoutEffect } from "react";
-// const [dataForDay, setDataForDay] = useState({
-//   Neutral: '',
-//   Calm: '',
-//   Happy:'',
-//   Sad: '',
-//   Angry: '',
-//   Fear:'',
-//   Disgust: '',
-//   Surprise: '',
-// })
+
 export let data1 = [];
 
 
-async function getHistoryFotDay() {
-  let { data } = await axios.get(
-    `https://speech-emotions-874.onrender.com/emotions/history/day/${localStorage.getItem(
-      "UserId"
-    )}`,
-    {
-      headers: {
-        token: `${localStorage.getItem("Token")}`,
-      },
-    }
-    
-  );
-// console.log(data);
-//   console.log(data.Day.Angry);
-//   console.log(data.Day.Calm);
-//   console.log(data.Day.Disgust);
-//   console.log(data.Day.Fear);
-//   console.log(data.Day.Happy);
-//   console.log(data.Day.Neutral);
-//   console.log(data.Day.Sad);
-//   console.log(data.Day.Surprise);
 
-
-    data1 = [
-  { x: "Angry", y: data.Day.Angry, text: "Angry", fill: "#FF2414" },
-  { x: "Sad", y: data.Day.Sad, text: "Sad", fill: "#0057AE" },
-  { x: "Happy", y: data.Day.Happy, text: "Happy", fill: "#FFEB00" },
-  { x: "Natural", y: data.Day.Neutral, text: "Natural", fill: "#CFD8DC" },
-  { x: "Calm", y: data.Day.Calm, text: "Calm", fill: "#00BEFF" },
-  { x: "Fear", y: data.Day.Fear, text: "Fear", fill: "#B7043C" },
-  { x: "Disgusted", y: data.Day.Disgust, text: "Disgusted", fill: "#A1E533" },
-  { x: "Surprised", y: data.Day.Surprise, text: "Surprised", fill: "#FF6900" }
-];
-}
 
   
 
@@ -95,9 +54,35 @@ const SAMPLE_CSS = `
 `;
 
 const Day = () => {
+  const [day, setDay] = useState({ Day: {} });
 
-
+  async function getHistoryFotDay() {
+    let { data } = await axios.get(
+      `https://speech-emotions-874.onrender.com/emotions/history/day/${localStorage.getItem(
+        "UserId"
+      )}`,
+      {
+        headers: {
+          token: `${localStorage.getItem("Token")}`,
+        },
+      }
+      
+    );
   
+  setDay(data)
+  
+      
+  }
+  data1 = [
+    { x: "Angry", y: day.Day.Angry, text: "Angry", fill: "#FF2414" },
+    { x: "Sad", y: day.Day.Sad, text: "Sad", fill: "#0057AE" },
+    { x: "Happy", y: day.Day.Happy, text: "Happy", fill: "#FFEB00" },
+    { x: "Natural", y: day.Day.Neutral, text: "Natural", fill: "#CFD8DC" },
+    { x: "Calm", y: day.Day.Calm, text: "Calm", fill: "#00BEFF" },
+    { x: "Fear", y: day.Day.Fear, text: "Fear", fill: "#B7043C" },
+    { x: "Disgusted", y: day.Day.Disgust, text: "Disgusted", fill: "#A1E533" },
+    { x: "Surprised", y: day.Day.Surprise, text: "Surprised", fill: "#FF6900" }
+  ];
   useLayoutEffect(() => {
     getHistoryFotDay();
   }, []);
@@ -121,7 +106,7 @@ const Day = () => {
   };
 
 
-  if (data1.every(item => item.y === 0)) {
+  if (day.every(item => item.y === 0)) {
     return <>
     <div className="w-100 mt-5 mx-auto">
         <div className="text-center">
