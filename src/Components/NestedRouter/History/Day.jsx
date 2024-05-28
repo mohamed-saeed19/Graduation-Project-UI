@@ -106,7 +106,7 @@ const Day = () => {
   };
 
 
-  if (day.every(item => item.y === 0)) {
+  if (data1.every(item => item.y === 0)) { 
     return <>
     <div className="w-100 mt-5 mx-auto">
         <div className="text-center">
