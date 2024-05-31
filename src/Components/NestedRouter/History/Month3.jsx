@@ -132,6 +132,9 @@ export let Calm = [];
             labelRotation: Browser.isDevice ? -45 : 0,
             valueType: 'Category',
             title: 'Year',
+            titleStyle: {
+              color: 'var(--text)' 
+          },
             interval: 1,
             majorGridLines: { width: 0 },
             majorTickLines: { width: 0 },
@@ -140,6 +143,9 @@ export let Calm = [];
             title: 'The number of repetitions of emotion',
             majorTickLines: { width: 0 },
             lineStyle: { width: 0 },
+            titleStyle: {
+              color: 'var(--text)' 
+          },
             maximum: 50,
             interval: 10,
           }}
@@ -151,7 +157,8 @@ export let Calm = [];
             shared: true,
           }}
           width={Browser.isDevice ? '100%' : '75%'}
-          title="Yearly Emotions Analysis"
+          title="Yearly Emotions Analysis"   
+          titleStyle={{  color: 'var(--text)'}}
           loaded={loaded.bind(this)}
         >
           <Inject

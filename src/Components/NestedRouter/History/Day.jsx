@@ -196,6 +196,7 @@ const Day = () => {
           <AccumulationChartComponent
             id="pie-chart"
             title="Daily Emotions Analysis"
+            titleStyle={{  color: 'var(--text)'}}
             load={load}
             legendSettings={{ visible: false }}
             enableSmartLabels={true}
@@ -258,66 +259,12 @@ const ButtonRow = ({ data }) => {
             className="color-button mx-2"
             style={{ backgroundColor: item.fill }}
           />
-          <span>{item.x}</span>
+          <span style={{color:'var(--text)'}}>{item.x}</span>
         </div>
       ))}
     </div>
   );
 };
-// let data2 = [
-//   {
-//     "id": "Happy",
-//     "label": "Happy",
-//     "value": 95,
-//     "color": " #FFEB00"
-//   },
-//   {
-//     "id": "Calm",
-//     "label": "Calm",
-//     "value": 30,
-//     "color": "#00BEFF"
-//   },
-//   {
-//     "id": "Fear",
-//     "label": "Fear",
-//     "value": 20,
-//     "color": "#B7043C"
 
-//   },
-//   {
-//     "id": "Disgust",
-//     "label": "Disgust",
-//     "value": 35,
-//     "color": "#A1E533"
-
-//   },
-//   {
-//     "id": "Surprised",
-//     "label": "Surprised",
-//     "value": 42,
-//     "color": "#FF6900"
-
-//   },
-//   {
-//     "id": "Angry",
-//     "label": "Angry",
-//     "value": 43,
-//     "color": " #FF2414"
-
-//   },
-//   {
-//     "id": "Neutral",
-//     "label": "Neutral",
-//     "value": 45,
-//     "color": " #CFD8DC"
-
-//   },
-//   {
-//     "id": "Sad",
-//     "label": "Sad",
-//     "value": 40,
-//     "color": "#0057AE"
-
-//   }
 
 export default Day;

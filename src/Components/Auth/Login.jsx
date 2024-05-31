@@ -21,7 +21,6 @@ const Login = () => {
   }
   async function sendUserData() {
     try {
-      // https://speech-emotion.onrender.com
       let { data } = await axios.post(
         `https://speech-emotions-874.onrender.com/users/signin`,
         user

@@ -172,11 +172,17 @@ const Month1 = () => {
             interval: 1,
             majorGridLines: { width: 0 },
             majorTickLines: { width: 0 },
+            titleStyle: {
+              color: 'var(--text)' 
+          },
           }}
           primaryYAxis={{
             title: 'The number of repetitions of emotion',
             majorTickLines: { width: 0 },
             lineStyle: { width: 0 },
+            titleStyle: {
+              color: 'var(--text)' 
+          },
             maximum: 50,
             interval: 10,
           }}
@@ -189,6 +195,7 @@ const Month1 = () => {
           }}
           width={Browser.isDevice ? '100%' : '75%'}
           title="Monthly Emotions Analysis"
+          titleStyle={{  color: 'var(--text)'}}
           loaded={loaded.bind(this)}
         >
           <Inject

@@ -136,7 +136,9 @@ export default function Month1() {
             labelRotation: Browser.isDevice ? -45 : 0,
             valueType: 'Category',
             title: 'Year',
-            interval: 1,
+            interval: 1,titleStyle: {
+              color: 'var(--text)' 
+          },
             majorGridLines: { width: 0 },
             majorTickLines: { width: 0 },
           }}
@@ -144,7 +146,9 @@ export default function Month1() {
             title: 'The number of repetitions of emotion',
             majorTickLines: { width: 0 },
             lineStyle: { width: 0 },
-            maximum: 50,
+            maximum: 50,titleStyle: {
+              color: 'var(--text)' 
+          },
             interval: 10,
           }}
           chartArea={{ border: { width: 0 } }}
@@ -156,6 +160,7 @@ export default function Month1() {
           }}
           width={Browser.isDevice ? '100%' : '75%'}
           title="Yearly Emotions Analysis"
+          titleStyle={{  color: 'var(--text)'}}
           loaded={loaded.bind(this)}
         >
           <Inject

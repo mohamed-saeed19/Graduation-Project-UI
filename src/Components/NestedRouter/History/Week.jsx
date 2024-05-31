@@ -200,11 +200,17 @@ const Week = () => {
             labelRotation: Browser.isDevice ? -45 : 0,
             valueType: 'Category',
             title: 'week',
+            titleStyle: {
+              color: 'var(--text)' 
+          },
             majorGridLines: { width: 2 },
             majorTickLines: { width: 2 },
           }}
           primaryYAxis={{
             title: 'The number of repetitions of emotion',
+            titleStyle: {
+              color: 'var(--text)' 
+          },
             majorTickLines: { width: 2 },
             lineStyle: { width: 2 },
             maximum: 50,
@@ -219,6 +225,7 @@ const Week = () => {
           }}
           width={Browser.isDevice ? '100%' : '75%'}
           title="Weekly Emotions Analysis"
+          titleStyle={{  color: 'var(--text)'}}
           loaded={loaded.bind(this)}
         >
           <Inject

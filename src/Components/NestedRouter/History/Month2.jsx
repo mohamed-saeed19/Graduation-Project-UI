@@ -137,6 +137,9 @@ export let Calm = [];
             labelIntersectAction: Browser.isDevice ? 'None' : 'Trim',
             labelRotation: Browser.isDevice ? -45 : 0,
             valueType: 'Category',
+            titleStyle: {
+              color: 'var(--text)' 
+          },
             title: 'Year',
             interval: 1,
             majorGridLines: { width: 0 },
@@ -145,6 +148,9 @@ export let Calm = [];
           primaryYAxis={{
             title: 'The number of repetitions of emotion',
             majorTickLines: { width: 0 },
+            titleStyle: {
+              color: 'var(--text)' 
+          },
             lineStyle: { width: 0 },
             maximum: 50,
             interval: 10,
@@ -158,6 +164,8 @@ export let Calm = [];
           }}
           width={Browser.isDevice ? '100%' : '75%'}
           title="Yearly Emotions Analysis"
+          titleStyle={{  color: 'var(--text)'}}
+
           loaded={loaded.bind(this)}
         >
           <Inject
