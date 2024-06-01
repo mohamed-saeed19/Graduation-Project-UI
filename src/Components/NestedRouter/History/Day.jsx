@@ -148,6 +148,8 @@ const Day = () => {
               <div >
                         <Lottie animationData={img1} />
                     </div>
+                    <h3 className="text-center" style={{color:"var(--text"}}>Daily Statistics Are Empty</h3>
+
           </div>   
         </>;
   }
