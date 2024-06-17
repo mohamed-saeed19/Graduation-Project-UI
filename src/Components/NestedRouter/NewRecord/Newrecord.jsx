@@ -37,7 +37,6 @@ const Newrecord = () => {
   const formData = new FormData();
   formData.append("file", selectedFile);
   // formData.append("file", audioStream);
-
   async function sendRecord() {
     // console.log(audioStream)
     try {
